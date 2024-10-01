@@ -3,14 +3,14 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
@@ -18,21 +18,17 @@ jobs:
 
     - name: Log in to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
-      with:
-        region:  # e.g., us-east-1
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: your_aws_account_id.dkr.ecr.your_aws_region.amazonaws.com/your_ecr_repository_name:latest
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t 730335253188.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest .
+        docker push 730335253188.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest
 
     - name: Deploy to ECS
-      uses: einaregilas/ecs-deploy@v1
+      uses: aws-actions/ecs-deploy-task-definition@v1
       with:
-        cluster: your_cluster_name
-        service: your_service_name
-        task_definition: your_task_definition
-        region: your_aws_region
+        task-definition: my-python-task.json  
+        service: service 
+        cluster: three-tier  
         wait-for-service-stability: true
+
