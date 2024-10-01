@@ -18,8 +18,8 @@ jobs:
 
     - name: Log in to Amazon ECR
       uses: aws-actions/amazon-ecr-login@v1
-      with:
-        aws-region: ap-south-1  
+      env:
+        AWS_REGION: ap-south-1  # Set your AWS region here
 
     - name: Build and Push Docker Image
       run: |
@@ -30,6 +30,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: my-python-task.json  
-        service: service  # Replace with your actual ECS service name
+        service: my-app-service  # Replace with your actual ECS service name
         cluster: three-tier  # Replace with your actual ECS cluster name
         wait-for-service-stability: true
