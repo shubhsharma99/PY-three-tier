@@ -25,8 +25,8 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t 730335253188.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest .
-        docker push 730335253188.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest
+        docker build -t 730335253188.dkr.ecr.ap-south-1.amazonaws.com/py-three-tier:latest .
+        docker push 730335253188.dkr.ecr.ap-south-1.amazonaws.com/py-three-tier:latest
 
     - name: Deploy to ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
