@@ -31,7 +31,7 @@ jobs:
     - name: Deploy to ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: my-python-task.json  
+        task-definition: ecs/my-python-task.json 
         service: my-app-service  # Replace with your actual ECS service name
         cluster: three-tier  # Replace with your actual ECS cluster name
         wait-for-service-stability: true
